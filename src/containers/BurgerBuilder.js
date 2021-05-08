@@ -21,35 +21,13 @@ const BurgerBuilder = (props) => {
   return (
     <React.Fragment>
       <Burger ingredients={ingredients} />
-      <div style={{ display: "flex", flexDirection: "row" }}>
+      <div style={{ display: "flex", flexDirection: "row", justifyContent:"center" }}>
         <BuildControls
-          text="سالاد کاهو و کلم"
-          onIncrement={() => handleIncrement("salad")}
-          onDecrement={() => handleDecrement("salad")}
-          count={ingredients.salad}
-          maxLimit={2}
+          ingredients={ingredients}
+          onIncrement={(item) => handleIncrement(item)}
+          onDecrement={(item) => handleDecrement(item)}
         />
-        <BuildControls
-          text="پنیر"
-          onIncrement={() => handleIncrement("cheese")}
-          onDecrement={() => handleDecrement("cheese")}
-          count={ingredients.cheese}
-          maxLimit={3}
-        />
-        <BuildControls
-          text="گوشت"
-          onIncrement={() => handleIncrement("meat")}
-          onDecrement={() => handleDecrement("meat")}
-          count={ingredients.meat}
-          maxLimit={2}
-        />
-        <BuildControls
-          text="ژامبون"
-          onIncrement={() => handleIncrement("bacon")}
-          onDecrement={() => handleDecrement("bacon")}
-          count={ingredients.bacon}
-          maxLimit={1}
-        />
+        
       </div>
     </React.Fragment>
   );

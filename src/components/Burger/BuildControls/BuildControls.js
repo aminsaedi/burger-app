@@ -1,17 +1,28 @@
 import React from "react";
+import "./buildControls.css";
+import SoloControl from "./SoloControl";
 
-const BuildControls = ({ text, onIncrement, onDecrement, maxLimit, count }) => {
+const BuildControls = ({ ingredients, onIncrement, onDecrement }) => {
+  const persianLables = {
+    bacon: "ژامبون",
+    cheese: "پنیر",
+    meat: "گوشت",
+    salad: "کاهو و کلم",
+  };
   return (
-    <div style={{ display: "inline" }}>
-      <p>
-        {text} : {count}
-      </p>
-      <button onClick={onIncrement} disabled={count >= maxLimit}>
-        +
-      </button>
-      <button onClick={onDecrement} disabled={count <= 0}>
-        -
-      </button>
+    <div className="buildControlArea">
+      {Object.keys(ingredients).map((keyName, keyIndex) => {
+        return (
+          <SoloControl
+            count={ingredients[keyName]}
+            key={keyIndex}
+            lable={keyName}
+            onDecrement={() => onDecrement(keyName)}
+            onIncrement={() => onIncrement(keyName)}
+            persianLables={persianLables}
+          />
+        );
+      })}
     </div>
   );
 };
