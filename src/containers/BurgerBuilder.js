@@ -30,12 +30,14 @@ const BurgerBuilder = (props) => {
   };
   return (
     <React.Fragment>
-      <Burger ingredients={ingredients} />
-      <BuildControls
-        ingredients={ingredients}
-        onIncrement={(item) => handleIncrement(item)}
-        onDecrement={(item) => handleDecrement(item)}
-      />
+      <div style={{display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"center"}} >
+        <Burger ingredients={ingredients} />
+        <BuildControls
+          ingredients={ingredients}
+          onIncrement={(item) => handleIncrement(item)}
+          onDecrement={(item) => handleDecrement(item)}
+        />
+      </div>
       <TotalPrice price={totalPrice} />
     </React.Fragment>
   );
