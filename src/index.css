@@ -2,3 +2,8 @@ body {
   margin: 0;
   font-family: "Vazir", sans-serif;
 }
+
+button{
+  font-family: inherit;
+  cursor: pointer;
+}
