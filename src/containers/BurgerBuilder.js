@@ -39,9 +39,9 @@ const BurgerBuilder = (props) => {
   };
   return (
     <React.Fragment>
-      {showCheckout &&  <Modal>
+      <Modal visible={showCheckout} >
         <Checkout persianLables={persianLables} ingredients={ingredients} onCancel={() => setShowCheckout(false)} />
-      </Modal>}
+      </Modal>
       <div
         style={{
           display: "flex",
