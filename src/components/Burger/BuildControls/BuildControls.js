@@ -2,13 +2,8 @@ import React from "react";
 import "./buildControls.css";
 import SoloControl from "./SoloControl";
 
-const BuildControls = ({ ingredients, onIncrement, onDecrement }) => {
-  const persianLables = {
-    bacon: " ژامبون 🍗",
-    cheese: "پنیر 🧈",
-    meat: "گوشت 🥩",
-    salad: "کاهو و کلم 🥬",
-  };
+const BuildControls = ({ ingredients, onIncrement, onDecrement,persianLables }) => {
+
   return (
     <div className="buildControlArea">
       {Object.keys(ingredients).map((keyName, keyIndex) => {

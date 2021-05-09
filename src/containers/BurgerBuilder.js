@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import BuildControls from "../components/Burger/BuildControls/BuildControls";
 import Burger from "../components/Burger/Burger";
+import Checkout from "../components/Burger/Checkout/Checkput";
 import TotalPrice from "../components/Burger/TotalPrice/TotalPrice";
+import Modal from "../components/UI/Modal/Modal";
 const BurgerBuilder = (props) => {
   const [ingredients, setIngredients] = useState({
     salad: 0,
@@ -9,6 +11,13 @@ const BurgerBuilder = (props) => {
     meat: 0,
     bacon: 0,
   });
+  const [showCheckout, setShowCheckout] = useState(false);
+  const persianLables = {
+    bacon: " ژامبون 🍗",
+    cheese: "پنیر 🧈",
+    meat: "گوشت 🥩",
+    salad: "کاهو و کلم 🥬",
+  };
   const [totalPrice, setTotalPrice] = useState(0);
   useEffect(() => {
     let total = 0;
@@ -30,15 +39,26 @@ const BurgerBuilder = (props) => {
   };
   return (
     <React.Fragment>
-      <div style={{display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"center"}} >
+      {showCheckout &&  <Modal>
+        <Checkout persianLables={persianLables} ingredients={ingredients} onCancel={() => setShowCheckout(false)} />
+      </Modal>}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <Burger ingredients={ingredients} />
         <BuildControls
           ingredients={ingredients}
           onIncrement={(item) => handleIncrement(item)}
           onDecrement={(item) => handleDecrement(item)}
+          persianLables={persianLables}
         />
       </div>
-      <TotalPrice price={totalPrice} />
+      <TotalPrice price={totalPrice} onClick={() => setShowCheckout(true)} />
     </React.Fragment>
   );
 };

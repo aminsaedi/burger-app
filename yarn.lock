@@ -7693,6 +7693,11 @@
   "resolved" "https://registry.npmjs.org/num2fraction/-/num2fraction-1.2.2.tgz"
   "version" "1.2.2"
 
+"num2persian@^3.2.2":
+  "integrity" "sha512-xwT+fAiVWq6Nde+JWf5/PlW3qAGRNa0TJEUJwoJmaXjmLp1dewOFiX2+jUSreAsTrX2qi/rzgk3diSt36f6ouQ=="
+  "resolved" "https://registry.npmjs.org/num2persian/-/num2persian-3.2.2.tgz"
+  "version" "3.2.2"
+
 "nwsapi@^2.2.0":
   "integrity" "sha512-h2AatdwYH+JHiZpv7pt/gSX1XoRGb7L/qSIeuqA6GwYoF9w1vP1cw42TO0aI2pNyshRK5893hNSl+1//vHK7hQ=="
   "resolved" "https://registry.npmjs.org/nwsapi/-/nwsapi-2.2.0.tgz"

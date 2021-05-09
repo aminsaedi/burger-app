@@ -1,0 +1,30 @@
+.checkout{
+    text-align: center;
+}
+
+.checkout__header{
+    margin: 0;
+}
+
+.checkout__list{
+    list-style: none;
+}
+
+.checkout__button{
+    outline: 0;
+    border: 0;
+    font-size: 1.3rem;
+    margin: 0 1.5rem;
+    padding: 0.3rem;
+    border-radius: 10px;
+    background-color: dodgerblue;
+    transition: all 0.3s ease-out;
+}
+
+.checkout__button:hover{
+    transform: scale(1.3);
+}
+
+.checkout__button--cancel{
+    background-color: tomato;
+}
