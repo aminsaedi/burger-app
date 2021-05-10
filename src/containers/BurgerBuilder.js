@@ -39,7 +39,7 @@ const BurgerBuilder = (props) => {
   };
   return (
     <React.Fragment>
-      <Modal visible={showCheckout} >
+      <Modal visible={showCheckout} onDismiss={() => setShowCheckout(false)} >
         <Checkout persianLables={persianLables} ingredients={ingredients} onCancel={() => setShowCheckout(false)} />
       </Modal>
       <div
