@@ -42,14 +42,6 @@ const BurgerBuilder = (props) => {
       <Modal visible={showCheckout} onDismiss={() => setShowCheckout(false)} >
         <Checkout persianLables={persianLables} ingredients={ingredients} onCancel={() => setShowCheckout(false)} />
       </Modal>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
         <Burger ingredients={ingredients} />
         <BuildControls
           ingredients={ingredients}
@@ -57,7 +49,7 @@ const BurgerBuilder = (props) => {
           onDecrement={(item) => handleDecrement(item)}
           persianLables={persianLables}
         />
-      </div>
+      
       <TotalPrice price={totalPrice} onClick={() => setShowCheckout(true)} />
     </React.Fragment>
   );

@@ -8,7 +8,14 @@
   font-size: 2rem;
   margin: 1rem auto;
   padding: 1rem 0;
-  width: 30%;
+  text-align: center;
+  width: 80%;
+}
+
+@media screen and (min-width : 500px) {
+  .totalPrice{
+    width: 35%;
+  }
 }
 
 .totalPrice__button {
