@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
+import axiosOrders from "../axiosOrders";
 import BuildControls from "../components/Burger/BuildControls/BuildControls";
 import Burger from "../components/Burger/Burger";
 import Checkout from "../components/Burger/Checkout/Checkput";
-import TotalPrice from "../components/Burger/TotalPrice/TotalPrice";
 import Modal from "../components/UI/Modal/Modal";
+import TotalPrice from "../components/Burger/TotalPrice/TotalPrice";
+import Spinner from "../components/UI/Spinner/Spinner";
+import axios from "axios";
+
 const BurgerBuilder = (props) => {
-  const [ingredients, setIngredients] = useState({
-    salad: 0,
-    cheese: 0,
-    meat: 0,
-    bacon: 0,
-  });
+  const [ingredients, setIngredients] = useState(null);
   const [showCheckout, setShowCheckout] = useState(false);
   const persianLables = {
     bacon: " ژامبون 🍗",
@@ -19,7 +18,22 @@ const BurgerBuilder = (props) => {
     salad: "کاهو و کلم 🥬",
   };
   const [totalPrice, setTotalPrice] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const setIngredientsFromServer = async () => {
+    try {
+      const result = await axios.get(
+        "https://amin-burger-builder-default-rtdb.europe-west1.firebasedatabase.app/ingredients.json"
+      );
+      setIngredients(result.data);
+    } catch (error) {
+      alert("Error on connecting to server.");
+    }
+  };
   useEffect(() => {
+    setIngredientsFromServer();
+  }, []);
+  useEffect(() => {
+    if(!ingredients) return
     let total = 0;
     total += ingredients.salad * 2000;
     total += ingredients.cheese * 3500;
@@ -37,19 +51,52 @@ const BurgerBuilder = (props) => {
     cache[key] -= 1;
     setIngredients(cache);
   };
+  const handleOrder = async () => {
+    const order = {
+      ingredients,
+      totalPrice,
+      customer: {
+        name: "amin saedi",
+        mobile: "09352233659",
+        address: {
+          street: "bahonar",
+          allay: "alaghemandan",
+          code: 16,
+        },
+      },
+    };
+    setLoading(true);
+    try {
+      await axiosOrders.post("/orders.json", order);
+      alert("Done!");
+    } catch (error) {
+      alert("Error.");
+    }
+    setLoading(false);
+    setShowCheckout(false);
+  };
   return (
     <React.Fragment>
-      <Modal visible={showCheckout} onDismiss={() => setShowCheckout(false)} >
-        <Checkout persianLables={persianLables} ingredients={ingredients} onCancel={() => setShowCheckout(false)} />
+      <Modal visible={showCheckout} onDismiss={() => setShowCheckout(false)}>
+        {loading ? (
+          <Spinner visible={loading} />
+        ) : (
+          ingredients && <Checkout
+            persianLables={persianLables}
+            ingredients={ingredients}
+            onCancel={() => setShowCheckout(false)}
+            onOrder={handleOrder}
+          />
+        )}
       </Modal>
-        <Burger ingredients={ingredients} />
-        <BuildControls
-          ingredients={ingredients}
-          onIncrement={(item) => handleIncrement(item)}
-          onDecrement={(item) => handleDecrement(item)}
-          persianLables={persianLables}
-        />
-      
+      {ingredients && <Burger ingredients={ingredients} />}
+      {ingredients && <BuildControls
+        ingredients={ingredients}
+        onIncrement={(item) => handleIncrement(item)}
+        onDecrement={(item) => handleDecrement(item)}
+        persianLables={persianLables}
+      />}
+
       <TotalPrice price={totalPrice} onClick={() => setShowCheckout(true)} />
     </React.Fragment>
   );

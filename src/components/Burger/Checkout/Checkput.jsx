@@ -2,7 +2,7 @@ import React from "react";
 import Num2persian from "num2persian";
 import "./checkout.css";
 
-const Checkout = ({ ingredients, persianLables, onCancel }) => {
+const Checkout = ({ ingredients, persianLables, onCancel,onOrder }) => {
   return (
     <div className="checkout">
       <h1 className="checkout__header">برا ی برگر خفن آماده ای؟</h1>
@@ -25,7 +25,7 @@ const Checkout = ({ ingredients, persianLables, onCancel }) => {
       <button className="checkout__button checkout__button--cancel" onClick={onCancel} >
         😬 میخوام تغیرش بدم
       </button>
-      <button className="checkout__button">🥲 همین عالیه اصن</button>
+      <button className="checkout__button" onClick={onOrder} >🥲 همین عالیه اصن</button>
     </div>
   );
 };
